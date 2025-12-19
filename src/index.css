@@ -175,25 +175,6 @@
   --sidebar-ring: 187 85% 45%;
 }
 
-.runway-divider {
-  position: relative;
-  height: 2px;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(59, 130, 246, 0.2) 15%,
-    rgba(59, 130, 246, 0.8) 50%,
-    rgba(59, 130, 246, 0.2) 85%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 10px rgba(59, 130, 246, 0.4),
-    0 0 20px rgba(59, 130, 246, 0.25);
-}
-
 @layer base {
   * {
     @apply border-border;

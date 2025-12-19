@@ -120,9 +120,9 @@ export function SocialCard({ social, index }: SocialCardProps) {
   return (
     <article
       className={cn(
-        "group glass rounded-xl p-6 transition-all duration-300",
-        "hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5",
-        "hover:-translate-y-1",
+        "group glass rounded-xl p-6 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary/60 focus-within:ring-offset-2 focus-within:ring-offset-background",
+        "hover:border-primary/30 hover:shadow-lg hover:shadow-primary/8",
+        "hover:-translate-y-1.5",
         "animate-slide-up"
       )}
       style={{ animationDelay: `${index * 0.05}s` }}
@@ -174,9 +174,9 @@ export function SocialCard({ social, index }: SocialCardProps) {
           rel="noopener noreferrer"
           className={cn(
             "flex-shrink-0 inline-flex items-center justify-center",
-            "w-10 h-10 rounded-lg",
-            "bg-secondary hover:bg-primary hover:text-primary-foreground",
-            "transition-all duration-300",
+            "w-10 h-10 rounded-lg ring-0",
+            "bg-secondary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/25",
+            "transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           )}
           aria-label={`Open ${social.platform}`}

@@ -120,13 +120,14 @@ export function Navbar() {
 
         {/* Right-side controls */}
         <div className="hidden md:flex items-center gap-3">
-          <div className="px-3 py-1 rounded-full glass text-xs font-medium text-foreground/80">
-            Jman’s local time: <span className="font-semibold text-foreground">{localTime}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold text-foreground/90 min-w-[220px] justify-center h-10">
+            <span className="text-foreground/80">Jman's local time:</span>
+            <span className="text-foreground">{localTime}</span>
           </div>
           <button
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background min-w-[140px] justify-center h-10"
             aria-label="Toggle color theme"
             title="Toggle color theme"
           >
@@ -152,13 +153,14 @@ export function Navbar() {
 
       {/* Mobile top bar extras */}
       <div className="md:hidden container mt-2 flex items-center justify-between gap-3 px-4">
-        <div className="px-3 py-1 rounded-full glass text-xs font-medium text-foreground/80">
-          Jman’s local time: <span className="font-semibold text-foreground">{localTime}</span>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold text-foreground/90 min-w-[220px] justify-center h-10">
+          <span className="text-foreground/80">Jman's local time:</span>
+          <span className="text-foreground">{localTime}</span>
         </div>
         <button
           type="button"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background min-w-[140px] justify-center h-10"
           aria-label="Toggle color theme"
           title="Toggle color theme"
         >

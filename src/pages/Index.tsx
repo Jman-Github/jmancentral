@@ -23,9 +23,6 @@ const Index = () => {
         showScrollButton
         scrollTarget="#projects"
       />
-      <div className="py-6 px-4">
-        <div className="runway-divider" aria-hidden="true" />
-      </div>
 
       {/* Projects Section (lazy-loaded) */}
       <Suspense fallback={<div className="text-center text-muted-foreground py-12">Loading projects…</div>}>

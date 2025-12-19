@@ -23,10 +23,6 @@ const SocialLinks = () => {
         scrollTarget="#social-links"
         scrollButtonLabel="View Social Links"
       />
-      <div className="py-6 px-4">
-        <div className="runway-divider" aria-hidden="true" />
-      </div>
-
       {/* Social Grid */}
       <section id="social-links" className="py-20">
         <div className="container">
