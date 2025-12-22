@@ -19,6 +19,7 @@ import {
 import type { SocialLink } from "@/config/siteData";
 import { cn } from "@/lib/utils";
 import medalIconUrl from "@/assets/icons/medal.png";
+import soraIconUrl from "@/assets/icons/sora.png";
 
 type IconProps = { className?: string; style?: React.CSSProperties };
 type IconComponent = React.ComponentType<IconProps>;
@@ -43,13 +44,40 @@ function MedalIcon({ className, style }: IconProps) {
   );
 }
 
+function SoraIcon({ className, style }: IconProps) {
+  const [errored, setErrored] = useState(false);
+
+  if (errored) {
+    return <ExternalLink className={cn("h-6 w-6", className)} style={style} />;
+  }
+
+  return (
+    <img
+      src={soraIconUrl}
+      alt=""
+      className={cn("h-6 w-6", className)}
+      style={style}
+      loading="lazy"
+      decoding="async"
+      onError={() => setErrored(true)}
+    />
+  );
+}
+
 const iconMap: Record<
   string,
-  { Icon: IconComponent; color?: string; backgroundColor?: string }
+  {
+    Icon: IconComponent;
+    color?: string;
+    backgroundColor?: string;
+    className?: string;
+    full?: boolean;
+  }
 > = {
   roblox: { Icon: SiRoblox, color: "#ffffff", backgroundColor: "#00A2FF" },
   discord: { Icon: SiDiscord, color: "#ffffff", backgroundColor: "#5865F2" },
   medal: { Icon: MedalIcon, backgroundColor: "#000000" },
+  sora: { Icon: SoraIcon, className: "h-full w-full object-cover", full: true },
   steam: { Icon: SiSteam, color: "#ffffff", backgroundColor: "#1b2838" },
   youtube: { Icon: SiYoutube, color: "#ffffff", backgroundColor: "#FF0000" },
   x: { Icon: SiX, color: "#ffffff", backgroundColor: "#000000" },
@@ -73,6 +101,7 @@ export function SocialCard({ social, index }: SocialCardProps) {
   const iconEntry = iconMap[social.icon];
   const Icon = iconEntry?.Icon ?? ExternalLink;
   const iconStyle = iconEntry?.color ? { color: iconEntry.color } : undefined;
+  const iconClassName = iconEntry?.className ?? "h-6 w-6";
   const iconContainerStyle = iconEntry?.backgroundColor
     ? { backgroundColor: iconEntry.backgroundColor }
     : undefined;
@@ -132,13 +161,15 @@ export function SocialCard({ social, index }: SocialCardProps) {
         <div
           className={cn(
             "flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-colors",
-            iconEntry?.backgroundColor
-              ? "opacity-90 group-hover:opacity-100"
-              : "bg-primary/10 group-hover:bg-primary/20"
+            iconEntry?.full
+              ? "overflow-hidden bg-transparent"
+              : iconEntry?.backgroundColor
+                ? "opacity-90 group-hover:opacity-100"
+                : "bg-primary/10 group-hover:bg-primary/20"
           )}
           style={iconContainerStyle}
         >
-          <Icon className="h-6 w-6" style={iconStyle} />
+          <Icon className={iconClassName} style={iconStyle} />
         </div>
 
         {/* Info */}

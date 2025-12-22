@@ -27,11 +27,16 @@ const SocialLinks = () => {
       <section id="social-links" className="py-20">
         <div className="container">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {socialLinks.map((social, index) => (
-              <div key={social.id}>
+            {socialLinks.map((social, index) => {
+              const isCenteredLast =
+                socialLinks.length % 3 === 1 &&
+                index === socialLinks.length - 1;
+              return (
+              <div key={social.id} className={isCenteredLast ? "lg:col-start-2" : undefined}>
                 <SocialCard social={social} index={index} />
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

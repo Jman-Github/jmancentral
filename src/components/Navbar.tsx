@@ -76,24 +76,26 @@ export function Navbar() {
           : "bg-transparent py-4"
       )}
     >
-      <nav className="container flex items-center justify-between">
+      <nav className="container flex items-center justify-between gap-4 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center">
         {/* Logo */}
-        <Link
-          to="/"
-          className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors"
-        >
-          <img
-            src={brandmarkSrc}
-            alt=""
-            className="h-6 w-6"
-            aria-hidden="true"
-            decoding="async"
-          />
-          <span>{siteConfig.name}</span>
-        </Link>
+        <div className="flex items-center xl:justify-self-start">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-xl md:text-2xl font-bold text-foreground hover:text-primary transition-colors"
+          >
+            <img
+              src={brandmarkSrc}
+              alt=""
+              className="h-7 w-7"
+              aria-hidden="true"
+              decoding="async"
+            />
+            <span>{siteConfig.name}</span>
+          </Link>
+        </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10 md:flex-1 md:justify-center xl:flex-none xl:justify-self-center">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -104,7 +106,7 @@ export function Navbar() {
                 }
               }}
               className={cn(
-                "relative font-medium transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded px-2 py-1",
+                "relative font-semibold text-lg whitespace-nowrap transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded px-2 py-1",
                 location.pathname === link.path
                   ? "text-primary"
                   : "text-muted-foreground"
@@ -119,15 +121,16 @@ export function Navbar() {
         </div>
 
         {/* Right-side controls */}
-        <div className="hidden md:flex items-center gap-3">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold text-foreground/90 min-w-[220px] justify-center h-10">
-            <span className="text-foreground/80">Jman's local time:</span>
-            <span className="text-foreground">{localTime}</span>
+        <div className="hidden xl:flex items-center gap-3 flex-nowrap xl:justify-self-end">
+          <div className="inline-flex items-center flex-nowrap px-5 py-2.5 rounded-full glass text-sm font-semibold text-foreground/90 w-max justify-center h-11 whitespace-nowrap shrink-0">
+            <span className="text-foreground/80 whitespace-nowrap">
+              Jman's local&nbsp;time:&nbsp;<span className="text-foreground">{localTime}</span>
+            </span>
           </div>
           <button
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background min-w-[140px] justify-center h-10"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background min-w-[150px] justify-center h-11 text-sm font-semibold whitespace-nowrap shrink-0"
             aria-label="Toggle color theme"
             title="Toggle color theme"
           >
@@ -152,15 +155,16 @@ export function Navbar() {
       </nav>
 
       {/* Mobile top bar extras */}
-      <div className="md:hidden container mt-2 flex items-center justify-between gap-3 px-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-semibold text-foreground/90 min-w-[220px] justify-center h-10">
-          <span className="text-foreground/80">Jman's local time:</span>
-          <span className="text-foreground">{localTime}</span>
+      <div className="md:flex xl:hidden container mt-2 flex items-center justify-between gap-3 px-4">
+        <div className="inline-flex items-center px-4 py-2 rounded-full glass text-sm font-semibold text-foreground/90 min-w-max justify-center h-11 whitespace-nowrap shrink-0">
+          <span className="text-foreground/80 whitespace-nowrap">
+            Jman's local&nbsp;time:&nbsp;<span className="text-foreground">{localTime}</span>
+          </span>
         </div>
         <button
           type="button"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background min-w-[140px] justify-center h-10"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background min-w-[150px] justify-center h-11 text-sm font-semibold"
           aria-label="Toggle color theme"
           title="Toggle color theme"
         >
