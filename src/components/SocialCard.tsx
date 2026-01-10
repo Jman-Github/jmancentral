@@ -1,30 +1,30 @@
 import { useState } from "react";
 import { ExternalLink, Copy } from "lucide-react";
-import { FaXbox } from "react-icons/fa";
-import {
-  SiDiscord,
-  SiGithub,
-  SiGuilded,
-  SiInstagram,
-  SiReddit,
-  SiReplit,
-  SiRoblox,
-  SiSteam,
-  SiThreads,
-  SiTiktok,
-  SiTwitch,
-  SiX,
-  SiYoutube,
-} from "react-icons/si";
 import type { SocialLink } from "@/config/siteData";
 import { cn } from "@/lib/utils";
+import discordIconUrl from "@/assets/icons/discord.svg";
+import githubIconUrl from "@/assets/icons/github.svg";
+import guildedIconUrl from "@/assets/icons/guilded.svg";
+import instagramIconUrl from "@/assets/icons/instagram.svg";
 import medalIconUrl from "@/assets/icons/medal.png";
+import redditIconUrl from "@/assets/icons/reddit.svg";
+import replitIconUrl from "@/assets/icons/replit.svg";
+import robloxIconUrl from "@/assets/icons/roblox.png";
 import soraIconUrl from "@/assets/icons/sora.png";
+import steamIconUrl from "@/assets/icons/steam.svg";
+import threadsIconUrl from "@/assets/icons/threads.svg";
+import tiktokIconUrl from "@/assets/icons/tiktok.svg";
+import twitchIconUrl from "@/assets/icons/twitch.svg";
+import xIconUrl from "@/assets/icons/x.svg";
+import xboxIconUrl from "@/assets/icons/xbox.svg";
+import youtubeIconUrl from "@/assets/icons/youtube.svg";
 
 type IconProps = { className?: string; style?: React.CSSProperties };
 type IconComponent = React.ComponentType<IconProps>;
 
-function MedalIcon({ className, style }: IconProps) {
+type ImageIconProps = IconProps & { src: string; alt?: string };
+
+function ImageIcon({ src, alt = "", className, style }: ImageIconProps) {
   const [errored, setErrored] = useState(false);
 
   if (errored) {
@@ -33,8 +33,8 @@ function MedalIcon({ className, style }: IconProps) {
 
   return (
     <img
-      src={medalIconUrl}
-      alt=""
+      src={src}
+      alt={alt}
       className={cn("h-6 w-6", className)}
       style={style}
       loading="lazy"
@@ -44,25 +44,28 @@ function MedalIcon({ className, style }: IconProps) {
   );
 }
 
-function SoraIcon({ className, style }: IconProps) {
-  const [errored, setErrored] = useState(false);
+const makeImageIcon = (src: string): IconComponent => {
+  return function Icon({ className, style }: IconProps) {
+    return <ImageIcon src={src} className={className} style={style} />;
+  };
+};
 
-  if (errored) {
-    return <ExternalLink className={cn("h-6 w-6", className)} style={style} />;
-  }
-
-  return (
-    <img
-      src={soraIconUrl}
-      alt=""
-      className={cn("h-6 w-6", className)}
-      style={style}
-      loading="lazy"
-      decoding="async"
-      onError={() => setErrored(true)}
-    />
-  );
-}
+const RobloxIcon = makeImageIcon(robloxIconUrl);
+const DiscordIcon = makeImageIcon(discordIconUrl);
+const MedalIcon = makeImageIcon(medalIconUrl);
+const SoraIcon = makeImageIcon(soraIconUrl);
+const SteamIcon = makeImageIcon(steamIconUrl);
+const YoutubeIcon = makeImageIcon(youtubeIconUrl);
+const XIcon = makeImageIcon(xIconUrl);
+const GithubIcon = makeImageIcon(githubIconUrl);
+const InstagramIcon = makeImageIcon(instagramIconUrl);
+const GuildedIcon = makeImageIcon(guildedIconUrl);
+const ThreadsIcon = makeImageIcon(threadsIconUrl);
+const RedditIcon = makeImageIcon(redditIconUrl);
+const ReplitIcon = makeImageIcon(replitIconUrl);
+const TiktokIcon = makeImageIcon(tiktokIconUrl);
+const TwitchIcon = makeImageIcon(twitchIconUrl);
+const XboxIcon = makeImageIcon(xboxIconUrl);
 
 const iconMap: Record<
   string,
@@ -74,22 +77,27 @@ const iconMap: Record<
     full?: boolean;
   }
 > = {
-  roblox: { Icon: SiRoblox, color: "#ffffff", backgroundColor: "#00A2FF" },
-  discord: { Icon: SiDiscord, color: "#ffffff", backgroundColor: "#5865F2" },
+  roblox: {
+    Icon: RobloxIcon,
+    backgroundColor: "#00A2FF",
+    className: "h-full w-full object-cover",
+    full: true,
+  },
+  discord: { Icon: DiscordIcon, backgroundColor: "#5865F2" },
   medal: { Icon: MedalIcon, backgroundColor: "#000000" },
   sora: { Icon: SoraIcon, className: "h-full w-full object-cover", full: true },
-  steam: { Icon: SiSteam, color: "#ffffff", backgroundColor: "#1b2838" },
-  youtube: { Icon: SiYoutube, color: "#ffffff", backgroundColor: "#FF0000" },
-  x: { Icon: SiX, color: "#ffffff", backgroundColor: "#000000" },
-  github: { Icon: SiGithub, color: "#ffffff", backgroundColor: "#181717" },
-  instagram: { Icon: SiInstagram, color: "#ffffff", backgroundColor: "#E4405F" },
-  guilded: { Icon: SiGuilded, color: "#000000", backgroundColor: "#F5C400" },
-  threads: { Icon: SiThreads, color: "#ffffff", backgroundColor: "#000000" },
-  reddit: { Icon: SiReddit, color: "#ffffff", backgroundColor: "#FF4500" },
-  replit: { Icon: SiReplit, color: "#ffffff", backgroundColor: "#F26207" },
-  tiktok: { Icon: SiTiktok, color: "#ffffff", backgroundColor: "#000000" },
-  twitch: { Icon: SiTwitch, color: "#ffffff", backgroundColor: "#9146FF" },
-  xbox: { Icon: FaXbox, color: "#ffffff", backgroundColor: "#107C10" },
+  steam: { Icon: SteamIcon, backgroundColor: "#1b2838" },
+  youtube: { Icon: YoutubeIcon, backgroundColor: "#FF0000" },
+  x: { Icon: XIcon, backgroundColor: "#000000" },
+  github: { Icon: GithubIcon, backgroundColor: "#181717" },
+  instagram: { Icon: InstagramIcon, backgroundColor: "#E4405F" },
+  guilded: { Icon: GuildedIcon, backgroundColor: "#F5C400" },
+  threads: { Icon: ThreadsIcon, backgroundColor: "#000000" },
+  reddit: { Icon: RedditIcon, backgroundColor: "#FF4500" },
+  replit: { Icon: ReplitIcon, backgroundColor: "#F26207" },
+  tiktok: { Icon: TiktokIcon, backgroundColor: "#000000" },
+  twitch: { Icon: TwitchIcon, backgroundColor: "#9146FF" },
+  xbox: { Icon: XboxIcon, backgroundColor: "#107C10" },
 };
 
 interface SocialCardProps {

@@ -1,5 +1,9 @@
 // Site configuration - Edit this file to customize your content
 
+import githubMarkUrl from "@/assets/icons/github-mark.png";
+import robloxAppIconUrl from "@/assets/icons/roblox.png";
+import universalRevancedManagerIconUrl from "@/assets/icons/universal-revanced-manager.png";
+
 export const siteConfig = {
   name: "JMAN CENTRAL",
   email: "jman@public.jmancentral.com",
@@ -25,7 +29,7 @@ export const projects: Project[] = [
     details: "This repository contains pre-bundled ReVanced patches that simplify the patching process for various Android applications. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/ReVanced-Patch-Bundles",
-    image: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    image: githubMarkUrl,
   },
   {
     id: "awesome-revanced",
@@ -34,7 +38,7 @@ export const projects: Project[] = [
     details: "An awesome list featuring tools, guides, and resources related to ReVanced. Community-driven and regularly updated with new content. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/Awesome-ReVanced",
-    image: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+    image: githubMarkUrl,
   },
   {
     id: "universal-revanced-manager",
@@ -43,7 +47,7 @@ export const projects: Project[] = [
     details: "An Android application to use ReVanced on that has extra features the official manager doesn't have. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/Universal-ReVanced-Manager",
-    image: "https://raw.githubusercontent.com/Jman-Github/Universal-ReVanced-Manager/refs/heads/main/assests/icons/icon.png",
+    image: universalRevancedManagerIconUrl,
   },
   {
     id: "scp-sculpture",
@@ -52,7 +56,7 @@ export const projects: Project[] = [
     details: "An immersive Roblox experience where players could roleplay scenarios involving SCP-173. The project was discontinued due to a loss of motivation.",
     status: "discontinued",
     url: "https://www.roblox.com/games/5941309542/SCP-The-Sculpture-Roleplay",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/500px-Roblox_%282025%29_%28App_Icon%29.svg.png",
+    image: robloxAppIconUrl,
     lastUpdated: "April 2024",
   },
   {
@@ -62,7 +66,7 @@ export const projects: Project[] = [
     details: "A fun cart ride game featuring infinite procedurally generated tracks. The project was discontinued due to a loss of motivation.",
     status: "discontinued",
     url: "https://www.roblox.com/games/13975568604/Infinite-Cart-Ride",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Roblox_%282025%29_%28App_Icon%29.svg/500px-Roblox_%282025%29_%28App_Icon%29.svg.png",
+    image: robloxAppIconUrl,
     lastUpdated: "August 2023",
   },
 ];
