@@ -8,6 +8,7 @@ export const siteConfig = {
   name: "JMAN CENTRAL",
   email: "jman@public.jmancentral.com",
   tagline: "Projects and links",
+  siteUrl: "https://jmancentral.com",
 };
 
 export interface Project {
@@ -18,6 +19,7 @@ export interface Project {
   status: "active" | "discontinued";
   url: string;
   image?: string;
+  githubRepo?: string;
   lastUpdated?: string;
 }
 
@@ -29,6 +31,7 @@ export const projects: Project[] = [
     details: "This repository contains pre-bundled ReVanced patches that simplify the patching process for various Android applications. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/ReVanced-Patch-Bundles",
+    githubRepo: "Jman-Github/ReVanced-Patch-Bundles",
     image: githubMarkUrl,
   },
   {
@@ -38,6 +41,7 @@ export const projects: Project[] = [
     details: "An awesome list featuring tools, guides, and resources related to ReVanced. Community-driven and regularly updated with new content. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/Awesome-ReVanced",
+    githubRepo: "Jman-Github/Awesome-ReVanced",
     image: githubMarkUrl,
   },
   {
@@ -47,6 +51,7 @@ export const projects: Project[] = [
     details: "An Android application to use ReVanced on that has extra features the official manager doesn't have. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/Universal-ReVanced-Manager",
+    githubRepo: "Jman-Github/Universal-ReVanced-Manager",
     image: universalRevancedManagerIconUrl,
   },
   {
@@ -88,10 +93,10 @@ export const socialLinks: SocialLink[] = [
   { id: "youtube", platform: "YouTube", username: "OffcialJmanYoutube", url: "https://www.youtube.com/channel/UCB4b-b-eiFoPyhs45tPqGZw", icon: "youtube" },
   { id: "twitter", platform: "X / Twitter", username: "Jman_TW", url: "https://x.com/Jman_TW", icon: "x" },
   { id: "github", platform: "GitHub", username: "Jman-Github", url: "https://github.com/Jman-Github", icon: "github" },
-  { id: "instagram", platform: "Instagram", username: "jman_media", url: "https://instagram.com", icon: "instagram" },
+  { id: "instagram", platform: "Instagram", username: "jman_media", url: "https://instagram.com/jman_media", icon: "instagram" },
   { id: "guilded", platform: "Guilded", username: "JmanGuilded", url: "https://www.guilded.gg/u/JmanGuilded", icon: "guilded" },
   { id: "threads", platform: "Threads", username: "jman_media", url: "https://www.threads.net/@jman_media", icon: "threads" },
-  { id: "reddit", platform: "Reddit", username: "u/Jman-Reddit", url: "https://www.reddit.com/user/Jman-Redditm", icon: "reddit" },
+  { id: "reddit", platform: "Reddit", username: "u/Jman-Reddit", url: "https://www.reddit.com/user/Jman-Reddit", icon: "reddit" },
   { id: "replit", platform: "Replit", username: "JmanReplit", url: "https://replit.com/@JmanReplit", icon: "replit" },
   { id: "tiktok", platform: "TikTok", username: "jmantiktok6666", url: "https://www.tiktok.com/@jmantiktok6666", icon: "tiktok" },
   { id: "twitch", platform: "Twitch", username: "Jman_Twitch6666", url: "https://www.twitch.tv/jman_twitch6666", icon: "twitch" },

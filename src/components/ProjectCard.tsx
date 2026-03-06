@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { ExternalLink, ChevronDown, ChevronUp, Calendar } from "lucide-react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { ExternalLink, ChevronDown, ChevronUp, Calendar, Star } from "lucide-react";
 import type { Project } from "@/config/siteData";
+import type { GitHubProjectStats } from "@/hooks/use-github-project-stats";
 import { cn } from "@/lib/utils";
 import {
   Popover,
@@ -11,12 +12,59 @@ import {
 interface ProjectCardProps {
   project: Project;
   index: number;
+  stats?: GitHubProjectStats;
 }
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
+export function ProjectCard({ project, index, stats }: ProjectCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [chipsExpanded, setChipsExpanded] = useState(false);
+  const [chipsOverflowing, setChipsOverflowing] = useState(false);
+  const [chipRowHeight, setChipRowHeight] = useState<number | null>(null);
   const [descOpen, setDescOpen] = useState(false);
+  const chipsRef = useRef<HTMLDivElement | null>(null);
+  const lastUpdated = stats?.lastUpdated ?? project.lastUpdated;
   const toggleDetails = () => setIsExpanded((prev) => !prev);
+
+  useLayoutEffect(() => {
+    const container = chipsRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const measure = () => {
+      const firstChip = container.firstElementChild as HTMLElement | null;
+
+      if (!firstChip) {
+        setChipRowHeight(null);
+        setChipsOverflowing(false);
+        setChipsExpanded(false);
+        return;
+      }
+
+      const nextRowHeight = Math.ceil(firstChip.getBoundingClientRect().height);
+      const hasOverflow = container.scrollHeight > nextRowHeight + 1;
+
+      setChipRowHeight(nextRowHeight);
+      setChipsOverflowing(hasOverflow);
+
+      if (!hasOverflow) {
+        setChipsExpanded(false);
+      }
+    };
+
+    measure();
+
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(container);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [lastUpdated, stats?.latestRelease, stats?.stars]);
+
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -110,12 +158,56 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 </PopoverContent>
               </Popover>
             </div>
-            {project.lastUpdated && (
+            {(stats || lastUpdated) && (
               <div className="mt-2">
-                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-semibold">
-                  <Calendar className="h-3 w-3" aria-hidden="true" />
-                  Updated {project.lastUpdated}
-                </span>
+                <div
+                  ref={chipsRef}
+                  className="flex flex-wrap items-center gap-2 overflow-hidden transition-[max-height] duration-300"
+                  style={
+                    chipsExpanded || !chipsOverflowing || chipRowHeight === null
+                      ? undefined
+                      : { maxHeight: `${chipRowHeight}px` }
+                  }
+                >
+                  {typeof stats?.stars === "number" && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-semibold">
+                      <Star className="h-3 w-3 fill-current" aria-hidden="true" />
+                      {stats.stars.toLocaleString()} stars
+                    </span>
+                  )}
+                  {stats?.latestRelease && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-semibold">
+                      Latest release: {stats.latestRelease}
+                    </span>
+                  )}
+                  {lastUpdated && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-semibold">
+                      <Calendar className="h-3 w-3" aria-hidden="true" />
+                      Updated {lastUpdated}
+                    </span>
+                  )}
+                </div>
+                {chipsOverflowing && (
+                  <div className="mt-1.5">
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setChipsExpanded((current) => !current);
+                      }}
+                      className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-semibold text-secondary-foreground/80 transition-colors hover:text-secondary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      aria-expanded={chipsExpanded}
+                      aria-label={chipsExpanded ? "Show fewer project details" : "Show more project details"}
+                    >
+                      {chipsExpanded ? "Show less" : "Show all"}
+                      {chipsExpanded ? (
+                        <ChevronUp className="h-3.5 w-3.5" aria-hidden="true" />
+                      ) : (
+                        <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

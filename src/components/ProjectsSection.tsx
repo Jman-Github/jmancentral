@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projects } from "@/config/siteData";
+import { useGitHubProjectStats } from "@/hooks/use-github-project-stats";
 import { cn } from "@/lib/utils";
 
 const activeProjects = projects.filter((p) => p.status === "active");
@@ -17,6 +18,8 @@ function getCenteredLastCardInnerClass(index: number, total: number) {
 }
 
 export function ProjectsSection() {
+  const { data: githubStats = {} } = useGitHubProjectStats(activeProjects);
+
   return (
     <section id="projects" className="py-20">
       <div className="container">
@@ -41,7 +44,11 @@ export function ProjectsSection() {
                   )}
                 >
                   <div className={cn(getCenteredLastCardInnerClass(index, activeProjects.length))}>
-                    <ProjectCard project={project} index={index} />
+                    <ProjectCard
+                      project={project}
+                      index={index}
+                      stats={githubStats[project.id]}
+                    />
                   </div>
                 </div>
               ))}

@@ -2,19 +2,22 @@ import { Suspense, lazy } from "react";
 import { Hero } from "@/components/Hero";
 import { Layout } from "@/components/Layout";
 import { siteConfig } from "@/config/siteData";
-import heroImage from "@/assets/hero-social.jpg";
+import { usePageMetadata } from "@/hooks/use-page-metadata";
+import heroImage from "@/assets/hero-home.jpg";
 
 const ProjectsSection = lazy(() =>
   import("@/components/ProjectsSection").then((m) => ({ default: m.ProjectsSection }))
 );
 
 const Index = () => {
+  usePageMetadata({
+    title: "Jman Central - Projects and Links",
+    description: "JMAN CENTRAL - Personal hub for projects, social links, and more.",
+    url: siteConfig.siteUrl,
+  });
+
   return (
     <Layout>
-      {/* SEO */}
-      <title>{siteConfig.name} - Home</title>
-      <meta name="description" content={`${siteConfig.name} - ${siteConfig.tagline}`} />
-
       {/* Hero Section */}
       <Hero
         title="HOME"

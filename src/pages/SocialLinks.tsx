@@ -2,18 +2,18 @@ import { Hero } from "@/components/Hero";
 import { Layout } from "@/components/Layout";
 import { SocialCard } from "@/components/SocialCard";
 import { socialLinks, siteConfig } from "@/config/siteData";
-import heroImage from "@/assets/hero-home.jpg";
+import { usePageMetadata } from "@/hooks/use-page-metadata";
+import heroImage from "@/assets/hero-social.jpg";
 
 const SocialLinks = () => {
+  usePageMetadata({
+    title: "Jman Central - Social Links",
+    description: "Find JMAN CENTRAL across the internet.",
+    url: `${siteConfig.siteUrl}/social`,
+  });
+
   return (
     <Layout>
-      {/* SEO */}
-      <title>{siteConfig.name} - Social Links</title>
-      <meta
-        name="description"
-        content={`Find ${siteConfig.name} across the internet`}
-      />
-
       {/* Hero Section */}
       <Hero
         title="SOCIAL LINKS"
