@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Copy } from "lucide-react";
+import { Copy, Download } from "lucide-react";
 import { siteConfig } from "@/config/siteData";
 
 export function Footer() {
@@ -51,6 +51,15 @@ export function Footer() {
               {copied ? "Copied!" : siteConfig.email}
             </span>
           </button>
+          <a
+            href="/jman.public.key.asc"
+            download="jman.public.key.asc"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label="Download GPG public key"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            <span className="text-sm font-medium">GPG Key</span>
+          </a>
         </div>
       </div>
     </footer>
