@@ -75,8 +75,9 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
   return (
     <article
       className={cn(
-        "group glass rounded-xl overflow-hidden transition-all duration-300",
+        "group glass motion-surface rounded-xl overflow-hidden",
         "hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5",
+        "hover:-translate-y-1",
         "animate-slide-up"
       )}
       style={{ animationDelay: `${index * 0.1}s` }}
@@ -222,7 +223,7 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
             className={cn(
               "inline-flex items-center gap-2 px-4 py-2 rounded-lg",
               "bg-primary text-primary-foreground font-medium text-sm",
-              "hover:glow-sm transition-all duration-300",
+              "motion-interactive hover:glow-sm hover:-translate-y-0.5",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             )}
             onClick={(e) => e.stopPropagation()}
@@ -258,7 +259,7 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
         <div
           id={`details-${project.id}`}
           className={cn(
-            "overflow-hidden transition-all duration-300",
+            "overflow-hidden transition-[max-height,margin] duration-500 ease-[var(--motion-standard)]",
             isExpanded ? "max-h-40 mt-4" : "max-h-0"
           )}
         >

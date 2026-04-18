@@ -10,7 +10,6 @@ import medalIconUrl from "@/assets/icons/medal.png";
 import redditIconUrl from "@/assets/icons/reddit.svg";
 import replitIconUrl from "@/assets/icons/replit.svg";
 import robloxIconUrl from "@/assets/icons/roblox.png";
-import soraIconUrl from "@/assets/icons/sora.png";
 import steamIconUrl from "@/assets/icons/steam.svg";
 import threadsIconUrl from "@/assets/icons/threads.svg";
 import tiktokIconUrl from "@/assets/icons/tiktok.svg";
@@ -53,7 +52,6 @@ const makeImageIcon = (src: string): IconComponent => {
 const RobloxIcon = makeImageIcon(robloxIconUrl);
 const DiscordIcon = makeImageIcon(discordIconUrl);
 const MedalIcon = makeImageIcon(medalIconUrl);
-const SoraIcon = makeImageIcon(soraIconUrl);
 const SteamIcon = makeImageIcon(steamIconUrl);
 const YoutubeIcon = makeImageIcon(youtubeIconUrl);
 const XIcon = makeImageIcon(xIconUrl);
@@ -85,7 +83,6 @@ const iconMap: Record<
   },
   discord: { Icon: DiscordIcon, backgroundColor: "#5865F2" },
   medal: { Icon: MedalIcon, backgroundColor: "#000000" },
-  sora: { Icon: SoraIcon, className: "h-full w-full object-cover", full: true },
   steam: { Icon: SteamIcon, backgroundColor: "#1b2838" },
   youtube: { Icon: YoutubeIcon, backgroundColor: "#FF0000" },
   x: { Icon: XIcon, backgroundColor: "#000000" },
@@ -157,9 +154,9 @@ export function SocialCard({ social, index }: SocialCardProps) {
   return (
     <article
       className={cn(
-        "group glass rounded-xl p-6 transition-all duration-300 focus-within:ring-2 focus-within:ring-primary/60 focus-within:ring-offset-2 focus-within:ring-offset-background",
+        "group glass motion-surface rounded-xl p-6 focus-within:ring-2 focus-within:ring-primary/60 focus-within:ring-offset-2 focus-within:ring-offset-background",
         "hover:border-primary/30 hover:shadow-lg hover:shadow-primary/8",
-        "hover:-translate-y-1.5",
+        "hover:-translate-y-1",
         "animate-slide-up"
       )}
       style={{ animationDelay: `${index * 0.05}s` }}
@@ -215,7 +212,7 @@ export function SocialCard({ social, index }: SocialCardProps) {
             "flex-shrink-0 inline-flex items-center justify-center",
             "w-10 h-10 rounded-lg ring-0",
             "bg-secondary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/25",
-            "transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "motion-interactive hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           )}
           aria-label={`Open ${social.platform}`}

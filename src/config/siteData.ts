@@ -47,8 +47,8 @@ export const projects: Project[] = [
   {
     id: "universal-revanced-manager",
     name: "Universal ReVanced Manager Repository",
-    description: "A fork of the official ReVanced Manager",
-    details: "An Android application to use ReVanced on that has extra features the official manager doesn't have. Actively maintained with regular updates.",
+    description: "An Android application that supports ReVanced, Morphe, AmpleReVanced, and Legacy ReVanced patch bundles that has extra features the official manager doesn't have. Actively maintained with regular updates.",
+    details: "An Android application that supports ReVanced, Morphe, AmpleReVanced, and Legacy ReVanced patch bundles that has extra features the official manager doesn't have. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/Universal-ReVanced-Manager",
     githubRepo: "Jman-Github/Universal-ReVanced-Manager",
@@ -87,7 +87,6 @@ export interface SocialLink {
 export const socialLinks: SocialLink[] = [
   { id: "roblox", platform: "Roblox", username: "Jman_Blox", url: "https://www.roblox.com/users/539566549/profile", icon: "roblox" },
   { id: "discord", platform: "Discord", username: "JmanMedia", url: "https://discordapp.com/users/608814881302511616", icon: "discord" },
-  { id: "sora", platform: "Sora", username: "Jman-AI", url: "https://sora.chatgpt.com/profile/jman-ai", icon: "sora" },
   { id: "medal", platform: "Medal", username: "JmanMedal", url: "https://medal.tv/u/JmanMedal?invite=ur-MSxoVXAsMTg4Mzc2NjA4LA", icon: "medal" },
   { id: "steam", platform: "Steam", username: "JmanGaming", url: "https://steamcommunity.com/profiles/76561199007938519/", icon: "steam" },
   { id: "youtube", platform: "YouTube", username: "OffcialJmanYoutube", url: "https://www.youtube.com/channel/UCB4b-b-eiFoPyhs45tPqGZw", icon: "youtube" },

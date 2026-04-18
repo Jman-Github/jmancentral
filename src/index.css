@@ -44,6 +44,11 @@
     --glow: 187 85% 53%;
     --surface: 222 40% 12%;
     --surface-hover: 222 35% 16%;
+    --motion-standard: cubic-bezier(0.22, 1, 0.36, 1);
+    --motion-swift: cubic-bezier(0.16, 1, 0.3, 1);
+    --motion-duration-fast: 180ms;
+    --motion-duration-base: 320ms;
+    --motion-duration-slow: 520ms;
 
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 98%;
@@ -99,40 +104,26 @@
     radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.02), transparent 20%),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.015), transparent 35%);
   mix-blend-mode: screen;
-  opacity: 0.35;
-  animation: grainShift 6s steps(6) infinite;
+  opacity: 0.28;
+  will-change: transform;
+  animation: grainShift 14s linear infinite;
 }
 
 @keyframes grainShift {
   0% {
     transform: translate3d(0, 0, 0);
   }
-  10% {
-    transform: translate3d(-5px, -5px, 0);
-  }
   20% {
-    transform: translate3d(5px, -5px, 0);
-  }
-  30% {
-    transform: translate3d(-5px, 5px, 0);
+    transform: translate3d(-2px, -1px, 0);
   }
   40% {
-    transform: translate3d(5px, 5px, 0);
-  }
-  50% {
-    transform: translate3d(-3px, 3px, 0);
+    transform: translate3d(2px, -2px, 0);
   }
   60% {
-    transform: translate3d(3px, -3px, 0);
-  }
-  70% {
-    transform: translate3d(-3px, -3px, 0);
+    transform: translate3d(-1px, 2px, 0);
   }
   80% {
-    transform: translate3d(3px, 3px, 0);
-  }
-  90% {
-    transform: translate3d(2px, -2px, 0);
+    transform: translate3d(1px, 1px, 0);
   }
   100% {
     transform: translate3d(0, 0, 0);
@@ -196,11 +187,11 @@
   }
 
   .glow {
-    box-shadow: 0 0 20px hsl(var(--glow) / 0.3), 0 0 40px hsl(var(--glow) / 0.1);
+    box-shadow: 0 0 20px hsl(var(--glow) / 0.26), 0 0 40px hsl(var(--glow) / 0.1);
   }
 
   .glow-sm {
-    box-shadow: 0 0 10px hsl(var(--glow) / 0.2);
+    box-shadow: 0 0 12px hsl(var(--glow) / 0.18);
   }
 
   .glass {
@@ -209,5 +200,50 @@
 
   .surface {
     @apply bg-surface border border-border;
+  }
+
+  .motion-surface {
+    transition-property: transform, box-shadow, border-color, background-color, opacity;
+    transition-duration: var(--motion-duration-base);
+    transition-timing-function: var(--motion-standard);
+  }
+
+  .motion-surface:is(:hover, :focus-within) {
+    will-change: transform;
+  }
+
+  .motion-interactive {
+    transition-property: transform, box-shadow, background-color, border-color, color, opacity;
+    transition-duration: var(--motion-duration-fast);
+    transition-timing-function: var(--motion-swift);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-grain {
+    animation: none;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-float-gentle,
+  .animate-glow-pulse {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up {
+    opacity: 1 !important;
+  }
+
+  .motion-surface,
+  .motion-interactive {
+    transition-duration: 0ms;
+    will-change: auto;
   }
 }

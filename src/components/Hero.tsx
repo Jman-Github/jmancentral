@@ -1,6 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface HeroProps {
   title: string;
@@ -21,6 +21,8 @@ export function Hero({
 }: HeroProps) {
   const [parallax, setParallax] = useState(0);
   const [isDesktop, setIsDesktop] = useState<boolean>(true);
+  const frameRef = useRef<number | null>(null);
+  const latestParallaxRef = useRef(0);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -31,16 +33,43 @@ export function Hero({
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateParallax = () => {
+      frameRef.current = null;
+
       if (!isDesktop) {
+        latestParallaxRef.current = 0;
         setParallax(0);
         return;
       }
+
       const offset = window.scrollY * 0.15;
-      setParallax(Math.min(offset, 80));
+      const nextParallax = Math.min(offset, 80);
+
+      if (Math.abs(nextParallax - latestParallaxRef.current) < 0.5) {
+        return;
+      }
+
+      latestParallaxRef.current = nextParallax;
+      setParallax(nextParallax);
     };
+
+    const handleScroll = () => {
+      if (frameRef.current !== null) {
+        return;
+      }
+
+      frameRef.current = window.requestAnimationFrame(updateParallax);
+    };
+
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
   }, [isDesktop]);
 
   const backgroundStyle = useMemo(
@@ -48,7 +77,7 @@ export function Hero({
       backgroundImage: `url(${backgroundImage})`,
       transform: `translateY(${parallax * -1}px) scale(1.02)`,
       willChange: "transform",
-      transition: "transform 120ms ease-out",
+      transition: "transform 260ms var(--motion-standard)",
       backgroundPosition: "center",
       backgroundSize: "cover",
     }),
@@ -100,14 +129,14 @@ export function Hero({
             className={cn(
               "mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full",
               "bg-primary text-primary-foreground font-semibold",
-              "hover:glow transition-all duration-300 hover:scale-105",
+              "motion-interactive hover:glow hover:-translate-y-0.5 hover:scale-[1.02]",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               "animate-fade-in"
             )}
             style={{ animationDelay: "0.4s" }}
           >
             {scrollButtonLabel}
-            <ArrowDown className="h-4 w-4 animate-bounce" />
+            <ArrowDown className="h-4 w-4 animate-float-gentle" />
           </button>
         )}
       </div>
