@@ -8,6 +8,14 @@ export interface GitHubProjectStats {
   stars: number;
 }
 
+interface GitHubRelease {
+  created_at?: string;
+  draft?: boolean;
+  name?: string;
+  published_at?: string;
+  tag_name?: string;
+}
+
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -18,6 +26,26 @@ function formatUpdatedDate(value: string) {
   return dateFormatter.format(new Date(value));
 }
 
+function getReleaseTimestamp(release: GitHubRelease) {
+  const releaseDate = release.published_at ?? release.created_at;
+
+  return releaseDate ? new Date(releaseDate).getTime() : 0;
+}
+
+function getLatestReleaseName(releases: GitHubRelease[]) {
+  const latestRelease = releases
+    .filter((release) => !release.draft)
+    .reduce<GitHubRelease | null>((latest, release) => {
+      if (!latest) {
+        return release;
+      }
+
+      return getReleaseTimestamp(release) > getReleaseTimestamp(latest) ? release : latest;
+    }, null);
+
+  return latestRelease?.tag_name ?? latestRelease?.name ?? "N/A";
+}
+
 async function fetchRepoStats(repo: string): Promise<GitHubProjectStats> {
   const headers = {
     Accept: "application/vnd.github+json",
@@ -25,7 +53,7 @@ async function fetchRepoStats(repo: string): Promise<GitHubProjectStats> {
 
   const [repoResponse, releaseResponse] = await Promise.all([
     fetch(`https://api.github.com/repos/${repo}`, { headers }),
-    fetch(`https://api.github.com/repos/${repo}/releases?per_page=20`, { headers }),
+    fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`, { headers }),
   ]);
 
   if (!repoResponse.ok) {
@@ -39,17 +67,7 @@ async function fetchRepoStats(repo: string): Promise<GitHubProjectStats> {
   };
   const latestRelease = releaseResponse.ok
     ? await releaseResponse.json().then(
-        (
-          releases: Array<{
-            draft?: boolean;
-            name?: string;
-            prerelease?: boolean;
-            tag_name?: string;
-          }>,
-        ) =>
-          releases.find((release) => !release.draft && !release.prerelease)?.tag_name
-          ?? releases.find((release) => !release.draft && !release.prerelease)?.name
-          ?? "N/A",
+        (releases: GitHubRelease[]) => getLatestReleaseName(releases),
       )
     : "N/A";
 
