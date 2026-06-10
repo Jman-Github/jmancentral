@@ -92,7 +92,7 @@ export function Hero({
   };
 
   return (
-    <section className="relative min-h-[75vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden w-full max-w-full px-4 mx-auto">
+    <section className="relative min-h-[64svh] md:min-h-[60vh] flex items-center justify-center overflow-hidden w-full max-w-full px-4 mx-auto">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -107,7 +107,7 @@ export function Hero({
       <div className="absolute inset-0 pointer-events-none hero-grain" />
 
       {/* Content */}
-      <div className="relative z-10 container text-center px-4 py-24">
+      <div className="relative z-10 container text-center px-4 pt-24 pb-16 md:py-24">
         <h1
           className={cn(
             "text-5xl md:text-7xl font-bold mb-4 animate-fade-in",

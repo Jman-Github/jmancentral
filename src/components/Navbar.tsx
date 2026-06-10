@@ -73,7 +73,7 @@ export function Navbar() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
           ? "glass py-3"
-          : "bg-transparent py-4"
+          : "bg-transparent py-3 md:py-4"
       )}
     >
       <nav className="container flex items-center justify-between gap-4 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center">
@@ -141,10 +141,12 @@ export function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden p-2 text-foreground hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
+          aria-controls={isMobileMenuOpen ? "mobile-menu" : undefined}
         >
           {isMobileMenuOpen ? (
             <X className="h-6 w-6" />
@@ -154,8 +156,8 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile top bar extras */}
-      <div className="md:flex xl:hidden container mt-2 flex items-center justify-between gap-3 px-4">
+      {/* Tablet top bar extras */}
+      <div className="hidden md:flex xl:hidden container mt-2 items-center justify-between gap-3 px-4">
         <div className="inline-flex items-center px-4 py-2 rounded-full glass text-sm font-semibold text-foreground/90 min-w-max justify-center h-11 whitespace-nowrap shrink-0">
           <span className="text-foreground/80 whitespace-nowrap">
             Jman's local&nbsp;time:&nbsp;<span className="text-foreground">{localTime}</span>
@@ -173,29 +175,46 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={cn(
-          "md:hidden absolute top-full left-0 right-0 glass overflow-hidden transition-all duration-300",
-          isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
-        <div className="container py-4 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={cn(
-                "font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
-                location.pathname === link.path
-                  ? "text-primary bg-primary/10"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted"
-              )}
-            >
-              {link.name}
-            </Link>
-          ))}
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-menu"
+          className="md:hidden absolute top-full left-0 right-0 glass"
+        >
+          <div className="container py-4 flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  "font-medium py-2 px-4 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                  location.pathname === link.path
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <div className="mt-1 flex flex-col gap-3 border-t border-border/50 pt-4">
+              <div className="inline-flex h-10 items-center justify-center rounded-full glass px-4 text-sm font-semibold text-foreground/90">
+                <span className="text-foreground/80">
+                  Jman's local&nbsp;time:&nbsp;<span className="text-foreground">{localTime}</span>
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-secondary px-4 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                aria-label="Toggle color theme"
+                title="Toggle color theme"
+              >
+                {theme === "dark" ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

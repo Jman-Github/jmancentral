@@ -23,7 +23,6 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
   const [descOpen, setDescOpen] = useState(false);
   const chipsRef = useRef<HTMLDivElement | null>(null);
   const lastUpdated = stats?.lastUpdated ?? project.lastUpdated;
-  const toggleDetails = () => setIsExpanded((prev) => !prev);
 
   useLayoutEffect(() => {
     const container = chipsRef.current;
@@ -65,13 +64,6 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
     };
   }, [lastUpdated, stats?.latestRelease, stats?.stars]);
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      toggleDetails();
-    }
-  };
-
   return (
     <article
       className={cn(
@@ -81,11 +73,6 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
         "animate-slide-up"
       )}
       style={{ animationDelay: `${index * 0.1}s` }}
-      onClick={toggleDetails}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-      aria-expanded={isExpanded}
     >
       <div className="p-6">
         <div className="flex items-start gap-4">
@@ -106,15 +93,9 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
             <Popover>
               <PopoverTrigger asChild>
                 <button
+                  type="button"
                   className="text-left w-full text-lg font-semibold text-foreground group-hover:text-primary transition-colors truncate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   title={project.name}
-                  onClick={(e) => e.stopPropagation()}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.stopPropagation();
-                    }
-                  }}
-                  aria-expanded={false}
                   aria-label={`Project name: ${project.name}`}
                 >
                   {project.name}
@@ -134,14 +115,9 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
               <Popover open={descOpen} onOpenChange={setDescOpen}>
                 <PopoverTrigger asChild>
                   <button
+                    type="button"
                     className="text-left w-full text-sm text-muted-foreground cursor-pointer pr-2 transition-all line-clamp-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     title={project.description}
-                    onClick={(e) => e.stopPropagation()}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.stopPropagation();
-                      }
-                    }}
                     aria-expanded={descOpen}
                     aria-label={`Description: ${project.description}`}
                   >
@@ -226,15 +202,14 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
               "motion-interactive hover:glow-sm hover:-translate-y-0.5",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             )}
-            onClick={(e) => e.stopPropagation()}
           >
             <ExternalLink className="h-4 w-4" />
             Visit
           </a>
 
           <button
-            onClick={(e) => {
-              e.stopPropagation();
+            type="button"
+            onClick={() => {
               setIsExpanded(!isExpanded);
             }}
             className={cn(
@@ -258,26 +233,30 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
         {/* Expandable Details */}
         <div
           id={`details-${project.id}`}
+          aria-hidden={!isExpanded}
           className={cn(
-            "overflow-hidden transition-[max-height,margin] duration-500 ease-[var(--motion-standard)]",
+            "overflow-hidden transition-[max-height,margin] duration-500",
             isExpanded ? "max-h-40 mt-4" : "max-h-0"
           )}
+          style={{ transitionTimingFunction: "var(--motion-standard)" }}
         >
-          <div className="p-4 bg-muted/50 rounded-lg">
-            <p className="text-sm text-muted-foreground">{project.details}</p>
-            <div className="mt-3 flex items-center gap-2">
-              <span
-                className={cn(
-                  "inline-flex items-center px-2 py-1 rounded text-xs font-medium",
-                  project.status === "active"
-                    ? "bg-green-500/20 text-green-400"
-                    : "bg-muted-foreground/20 text-muted-foreground"
-                )}
-              >
-                {project.status === "active" ? "Active" : "Discontinued"}
-              </span>
+          {isExpanded && (
+            <div className="p-4 bg-muted/50 rounded-lg">
+              <p className="text-sm text-muted-foreground">{project.details}</p>
+              <div className="mt-3 flex items-center gap-2">
+                <span
+                  className={cn(
+                    "inline-flex items-center px-2 py-1 rounded text-xs font-medium",
+                    project.status === "active"
+                      ? "bg-green-500/20 text-green-400"
+                      : "bg-muted-foreground/20 text-muted-foreground"
+                  )}
+                >
+                  {project.status === "active" ? "Active" : "Discontinued"}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </article>
