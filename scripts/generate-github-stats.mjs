@@ -29,7 +29,6 @@ function icon(type, x, y) {
     forks: '<circle cx="4" cy="3.5" r="2"/><circle cx="12" cy="3.5" r="2"/><circle cx="8" cy="12.5" r="2"/><path d="M4 5.5v1.3A3.2 3.2 0 0 0 7.2 10H8M12 5.5v1.3A3.2 3.2 0 0 1 8.8 10H8"/>',
     github: '<path d="M8 1.2a6.8 6.8 0 0 0-2.2 13.2c.3.1.4-.1.4-.3v-1.3c-1.5.3-1.8-.6-1.8-.6-.2-.6-.6-.8-.6-.8-.5-.3 0-.3 0-.3.5 0 .8.6.8.6.5.8 1.3.6 1.6.5.1-.3.2-.6.4-.7-1.2-.2-2.5-.6-2.5-2.7 0-.6.2-1 .6-1.4-.1-.2-.3-.7.1-1.4 0 0 .5-.2 1.5.5a5.2 5.2 0 0 1 2.7 0c1-.7 1.5-.5 1.5-.5.4.7.2 1.2.1 1.4.4.4.6.8.6 1.4 0 2.1-1.3 2.5-2.5 2.7.2.2.4.5.4 1v1.5c0 .2.1.4.4.3A6.8 6.8 0 0 0 8 1.2Z"/>',
     code: '<path d="m6 4-4 4 4 4M10 4l4 4-4 4M9 2.2 7 13.8"/>',
-    sparkles: '<path d="m8 1 1 3.3L12 5.5 9 6.7 8 10 7 6.7 4 5.5 7 4.3ZM3 10l.5 1.7L5 12.2l-1.5.5L3 14.5l-.5-1.8-1.5-.5 1.5-.5Z"/>',
   };
   return start + icons[type] + '</g>';
 }
@@ -46,9 +45,6 @@ function statCard(x, y, label, value, description, iconName) {
 }
 
 function createSvg(stats) {
-  const topRepository = stats.featuredRepo?.name ?? "Open-source projects";
-  const shortRepository = topRepository.length > 44 ? topRepository.slice(0, 43) + "…" : topRepository;
-  const repositoryDescription = stats.featuredRepo?.description ?? "";
   let chipX = 50;
   const languageChips = stats.topLanguages.slice(0, 4).map((language) => {
     const item = chip(chipX, language);
@@ -57,12 +53,11 @@ function createSvg(stats) {
   }).join("");
 
   return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<svg width="1075" height="590" viewBox="0 0 1075 590" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title description">\n' +
+    '<svg width="1075" height="416" viewBox="0 0 1075 416" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title description">\n' +
     '<title id="title">Jman GitHub developer profile</title><desc id="description">This card summarizes my public GitHub activity: ' + xml(stats.totalPullRequests) + ' public pull requests, ' + xml(stats.totalIssues) + ' public issues, ' + xml(stats.publicRepos) + ' public repositories, ' + xml(stats.totalStars) + ' stars received, ' + xml(stats.followers) + ' followers, and ' + xml(stats.totalForks) + ' forks received.</desc>\n' +
-    '<defs><linearGradient id="panel" x1="0" y1="0" x2="1075" y2="590" gradientUnits="userSpaceOnUse"><stop stop-color="#0B182A"/><stop offset="1" stop-color="#071320"/></linearGradient><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><clipPath id="avatar"><rect x="50" y="118" width="55" height="55" rx="16"/></clipPath></defs>\n' +
-    '<rect x="9" y="16" width="1052" height="558" rx="24" fill="url(#panel)" stroke="#0A5976"/><circle cx="1030" cy="119" r="151" stroke="#25D3EC" stroke-opacity=".18"/><circle cx="1030" cy="119" r="113" stroke="#25D3EC" stroke-opacity=".11"/><circle cx="50" cy="70" r="4.5" fill="#25D3EC" filter="url(#glow)"/>\n' +
+    '<defs><linearGradient id="panel" x1="0" y1="0" x2="1075" y2="416" gradientUnits="userSpaceOnUse"><stop stop-color="#0B182A"/><stop offset="1" stop-color="#071320"/></linearGradient><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><clipPath id="avatar"><rect x="50" y="118" width="55" height="55" rx="16"/></clipPath></defs>\n' +
+    '<rect x="9" y="16" width="1052" height="384" rx="24" fill="url(#panel)" stroke="#0A5976"/><circle cx="1030" cy="119" r="151" stroke="#25D3EC" stroke-opacity=".18"/><circle cx="1030" cy="119" r="113" stroke="#25D3EC" stroke-opacity=".11"/><circle cx="50" cy="70" r="4.5" fill="#25D3EC" filter="url(#glow)"/>\n' +
     text(64, 74, "DEVELOPER PROFILE", { fill: "#25D3EC", size: 12.5, weight: 700, spacing: 2.2 }) +
-    '<g transform="translate(828 55)"><rect width="192" height="30" rx="15" fill="#081426" fill-opacity=".72" stroke="#1A2C43"/>' + text(13, 20, "github.com/" + stats.username, { fill: "#9EC2DD", size: 11.5, weight: 500 }) + text(174, 20, "↗", { fill: "#9EC2DD", size: 15, anchor: "middle" }) + '</g>' +
     '<image href="' + xml(stats.avatarImage ?? stats.avatarUrl) + '" x="50" y="118" width="55" height="55" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatar)"/><rect x="50" y="118" width="55" height="55" rx="16" fill="none" stroke="#0D5975"/>' +
     text(121, 132, "Open-source work by", { fill: "#8FAFC9", size: 14, weight: 600 }) +
     text(121, 166, "Jman", { size: 29, weight: 700 }) +
@@ -73,13 +68,7 @@ function createSvg(stats) {
     statCard(875, 118, "STARS EARNED", numberFormat.format(stats.totalStars), "Total number of stars my public repositories have received.", "stars") +
     statCard(562, 251, "FOLLOWERS", numberFormat.format(stats.followers), "Total number of GitHub users who follow me.", "followers") +
     statCard(718, 251, "TOTAL PRS", numberFormat.format(stats.totalPullRequests), "Total number of public pull requests I have opened on GitHub.", "prs") +
-    statCard(875, 251, "FORKS RECEIVED", numberFormat.format(stats.totalForks), "Total number of times my public repositories have been forked.", "forks") +
-    '<path d="M50 402H1020" stroke="#1A2B3E"/>' +
-    '<g transform="translate(519 427)"><rect width="32" height="32" rx="11" fill="#063046"/>' + icon("sparkles", 8, 8) + '</g>' +
-    text(535, 481, "TOP REPOSITORY", { fill: "#25D3EC", size: 11.5, weight: 700, anchor: "middle", spacing: .45 }) +
-    text(535, 506, shortRepository + " ↗", { size: 14.5, weight: 700, anchor: "middle" }) +
-    (repositoryDescription ? '<g><title>' + xml(repositoryDescription) + '</title><circle cx="203" cy="524" r="5" fill="#FF5275"/>' + text(217, 529, repositoryDescription.length > 90 ? repositoryDescription.slice(0, 89) + "…" : repositoryDescription, { fill: "#9EC2DD", size: 12.2, weight: 400 }) + '</g>' : '') +
-    '</svg>';
+    statCard(875, 251, "FORKS RECEIVED", numberFormat.format(stats.totalForks), "Total number of times my public repositories have been forked.", "forks") + '</svg>';
 }
 
 async function getSearchTotal(query, headers) {

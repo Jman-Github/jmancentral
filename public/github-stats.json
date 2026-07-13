@@ -9,13 +9,13 @@
   "totalForks": 73,
   "totalPullRequests": 53,
   "totalIssues": 47,
-  "activeRepos": 4,
+  "activeRepos": 5,
   "joinedYear": 2023,
   "topLanguages": [
     "Kotlin",
     "TypeScript",
     "Python",
-    "Java"
+    "JavaScript"
   ],
   "featuredRepo": {
     "name": "Universal-ReVanced-Manager",
@@ -23,5 +23,5 @@
     "description": "💊 An Android application to use ReVanced, Morphe and AmpleReVanced on that has extra features the official manager doesn't have",
     "stars": 1204
   },
-  "updatedAt": "2026-07-13T02:47:25.007Z"
+  "updatedAt": "2026-07-13T02:54:56.424Z"
 }
