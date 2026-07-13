@@ -5,6 +5,7 @@
   "type": "module",
   "packageManager": "npm@10.9.2",
   "scripts": {
+    "prebuild": "node scripts/generate-github-stats.mjs",
     "dev": "vite",
     "build": "vite build && node scripts/postbuild-pages.mjs",
     "build:dev": "vite build --mode development",

@@ -1,0 +1,27 @@
+{
+  "username": "Jman-Github",
+  "profileUrl": "https://github.com/Jman-Github",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/128645077?v=4",
+  "publicRepos": 6,
+  "followers": 132,
+  "following": 45,
+  "totalStars": 2113,
+  "totalForks": 73,
+  "totalPullRequests": 53,
+  "totalIssues": 47,
+  "activeRepos": 4,
+  "joinedYear": 2023,
+  "topLanguages": [
+    "Kotlin",
+    "TypeScript",
+    "Python",
+    "Java"
+  ],
+  "featuredRepo": {
+    "name": "Universal-ReVanced-Manager",
+    "url": "https://github.com/Jman-Github/Universal-ReVanced-Manager",
+    "description": "💊 An Android application to use ReVanced, Morphe and AmpleReVanced on that has extra features the official manager doesn't have",
+    "stars": 1204
+  },
+  "updatedAt": "2026-07-13T02:47:25.007Z"
+}

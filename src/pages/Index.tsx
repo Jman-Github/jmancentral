@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Hero } from "@/components/Hero";
+import { GitHubStatsPanel } from "@/components/GitHubStatsPanel";
 import { Layout } from "@/components/Layout";
 import { siteConfig } from "@/config/siteData";
 import { usePageMetadata } from "@/hooks/use-page-metadata";
@@ -11,7 +12,7 @@ const ProjectsSection = lazy(() =>
 
 const Index = () => {
   usePageMetadata({
-    title: "Jman Central - Projects and Links",
+    title: "Jman Central - Developer profile and projects",
     description: "JMAN CENTRAL - Personal hub for projects, social links, and more.",
     url: siteConfig.siteUrl,
   });
@@ -26,6 +27,8 @@ const Index = () => {
         showScrollButton
         scrollTarget="#projects"
       />
+
+      <GitHubStatsPanel />
 
       {/* Projects Section (lazy-loaded) */}
       <Suspense fallback={<div className="text-center text-muted-foreground py-12">Loading projects…</div>}>

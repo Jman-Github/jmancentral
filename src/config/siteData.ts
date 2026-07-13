@@ -7,7 +7,7 @@ import universalRevancedManagerIconUrl from "@/assets/icons/universal-revanced-m
 export const siteConfig = {
   name: "JMAN CENTRAL",
   email: "jman@public.jmancentral.com",
-  tagline: "Projects and links",
+  tagline: "Developer profile and projects",
   siteUrl: "https://jmancentral.com",
 };
 
