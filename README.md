@@ -19,11 +19,3 @@ npm i
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-## GitHub profile stats card
-
-The build refreshes `github-stats.svg` from public GitHub data. Add this to the profile README in the `Jman-Github/Jman-Github` repository:
-
-```md
-![Jman's GitHub developer profile](https://jmancentral.com/github-stats.svg)
-```
