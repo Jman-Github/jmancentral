@@ -1,6 +1,6 @@
 import { ArrowDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface HeroProps {
   title: string;
@@ -72,17 +72,14 @@ export function Hero({
     };
   }, [isDesktop]);
 
-  const backgroundStyle = useMemo(
-    () => ({
-      backgroundImage: `url(${backgroundImage})`,
-      transform: `translateY(${parallax * -1}px) scale(1.02)`,
-      willChange: "transform",
-      transition: "transform 260ms var(--motion-standard)",
-      backgroundPosition: "center",
-      backgroundSize: "cover",
-    }),
-    [backgroundImage, parallax]
-  );
+  const backgroundStyle = {
+    backgroundImage: `url(${backgroundImage})`,
+    transform: `translateY(${parallax * -1}px) scale(1.02)`,
+    willChange: "transform",
+    transition: "transform 260ms var(--motion-standard)",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+  };
 
   const handleScroll = () => {
     const element = document.querySelector(scrollTarget);

@@ -83,7 +83,12 @@ async function getSearchTotal(query, headers) {
 }
 
 async function getCurrentStats() {
-  const fallback = JSON.parse(await readFile(statsPath, "utf8"));
+  let fallback = null;
+  try {
+    fallback = JSON.parse(await readFile(statsPath, "utf8"));
+  } catch {
+    // Stats file doesn't exist yet or is empty
+  }
   const headers = {
     Accept: "application/vnd.github+json",
     "User-Agent": "jmancentral-stats",
@@ -124,8 +129,11 @@ async function getCurrentStats() {
     };
   } catch (error) {
     if (strictRefresh) throw error;
-    console.warn("Using saved GitHub stats: " + error.message);
-    return fallback;
+    if (fallback) {
+      console.warn("Using saved GitHub stats: " + error.message);
+      return fallback;
+    }
+    throw new Error("Unable to fetch GitHub stats and no saved fallback stats are available: " + error.message);
   }
 }
 

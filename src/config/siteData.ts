@@ -26,7 +26,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "revanced-patches",
-    name: "ReVanced Patch Bundles Repository",
+    name: "Patch Bundle Registry Repository",
     description: "A collection of ReVanced patches bundled for easy use",
     details: "This repository contains pre-bundled ReVanced patches that simplify the patching process for various Android applications. Actively maintained with regular updates.",
     status: "active",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
   {
     id: "universal-revanced-manager",
     name: "Universal ReVanced Manager Repository",
-    description: "An Android application that supports ReVanced, Morphe, AmpleReVanced, and Legacy ReVanced patch bundles that has extra features the official manager doesn't have. Actively maintained with regular updates.",
+    description: "An Android application supporting multiple patch bundles with extended features",
     details: "An Android application that supports ReVanced, Morphe, AmpleReVanced, and Legacy ReVanced patch bundles that has extra features the official manager doesn't have. Actively maintained with regular updates.",
     status: "active",
     url: "https://github.com/Jman-Github/Universal-ReVanced-Manager",
@@ -97,7 +97,7 @@ export const socialLinks: SocialLink[] = [
   { id: "threads", platform: "Threads", username: "jman_media", url: "https://www.threads.net/@jman_media", icon: "threads" },
   { id: "reddit", platform: "Reddit", username: "u/Jman-Reddit", url: "https://www.reddit.com/user/Jman-Reddit", icon: "reddit" },
   { id: "replit", platform: "Replit", username: "JmanReplit", url: "https://replit.com/@JmanReplit", icon: "replit" },
-  { id: "tiktok", platform: "TikTok", username: "jmantiktok6666", url: "https://www.tiktok.com/@jmantiktok6666", icon: "tiktok" },
+  { id: "tiktok", platform: "TikTok", username: "jman_tiktok", url: "https://www.tiktok.com/@jman_tiktok", icon: "tiktok" },
   { id: "twitch", platform: "Twitch", username: "Jman_Twitch6666", url: "https://www.twitch.tv/jman_twitch6666", icon: "twitch" },
   { id: "xbox", platform: "Xbox Live", username: "JmanCraft6646", url: "https://account.xbox.com/en-us/profile?gamertag=JmanCraft6646", icon: "xbox" },
 ];

@@ -236,7 +236,7 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
           aria-hidden={!isExpanded}
           className={cn(
             "overflow-hidden transition-[max-height,margin] duration-500",
-            isExpanded ? "max-h-40 mt-4" : "max-h-0"
+            isExpanded ? "max-h-96 mt-4" : "max-h-0"
           )}
           style={{ transitionTimingFunction: "var(--motion-standard)" }}
         >

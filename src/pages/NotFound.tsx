@@ -1,15 +1,23 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { siteConfig } from "@/config/siteData";
+import { usePageMetadata } from "@/hooks/use-page-metadata";
 
 const NotFound = () => {
   const location = useLocation();
+
+  usePageMetadata({
+    title: "404 — Page Not Found | Jman Central",
+    description: "The requested page could not be found.",
+    url: `${siteConfig.siteUrl}${location.pathname}`,
+  });
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-foreground">
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-foreground">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,199,255,0.12),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(0,255,184,0.12),transparent_30%),radial-gradient(circle_at_50%_80%,rgba(0,147,255,0.08),transparent_35%)]" />
 
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-16">
@@ -20,8 +28,8 @@ const NotFound = () => {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">404 — Page Not Found</h1>
-          <p className="text-base md:text-lg text-muted-foreground">
-            We can’t find the route <span className="font-semibold text-foreground/90">“{location.pathname}”</span>. Let’s get you back on course.
+          <p className="text-base md:text-lg text-muted-foreground break-words">
+            We can’t find the route <span className="font-semibold text-foreground/90 break-all">“{location.pathname}”</span>. Let’s get you back on course.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -44,7 +52,7 @@ const NotFound = () => {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

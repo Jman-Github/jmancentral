@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink, Copy } from "lucide-react";
 import type { SocialLink } from "@/config/siteData";
 import { cn } from "@/lib/utils";
@@ -112,6 +112,12 @@ export function SocialCard({ social, index }: SocialCardProps) {
     : undefined;
   const [copied, setCopied] = useState(false);
 
+  useEffect(() => {
+    if (!copied) return;
+    const timeout = setTimeout(() => setCopied(false), 1500);
+    return () => clearTimeout(timeout);
+  }, [copied]);
+
   const fallbackCopy = (text: string) => {
     try {
       const textarea = document.createElement("textarea");
@@ -139,12 +145,10 @@ export function SocialCard({ social, index }: SocialCardProps) {
       } else if (fallbackCopy(social.username)) {
         setCopied(true);
       }
-      setTimeout(() => setCopied(false), 1500);
     } catch (e) {
       const ok = fallbackCopy(social.username);
       if (ok) {
         setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
       } else {
         console.error("Failed to copy handle", e);
       }

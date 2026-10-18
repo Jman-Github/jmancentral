@@ -82,7 +82,7 @@ export function useGitHubProjectStats(projects: Project[]) {
   const githubProjects = projects.filter((project) => project.githubRepo);
 
   return useQuery({
-    queryKey: ["github-project-stats", githubProjects.map((project) => project.githubRepo)],
+    queryKey: ["github-project-stats", githubProjects.map((project) => project.githubRepo).join(",")],
     queryFn: async () => {
       const entries = await Promise.all(
         githubProjects.map(async (project) => {

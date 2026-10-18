@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, SunMedium } from "lucide-react";
 import { siteConfig } from "@/config/siteData";
@@ -8,6 +8,13 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "Social Links", path: "/social" },
 ];
+
+const timeFormatter = new Intl.DateTimeFormat("en-US", {
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "America/New_York",
+  timeZoneName: "short",
+});
 
 export function Navbar() {
   const brandmarkSrc = `${import.meta.env.BASE_URL}brandmark.gif`;
@@ -20,32 +27,22 @@ export function Navbar() {
     const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
     return prefersLight ? "light" : "dark";
   });
-  const formatLocalTime = useMemo(
-    () => () =>
-      new Intl.DateTimeFormat("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        timeZone: "America/New_York",
-        timeZoneName: "short",
-      }).format(new Date()),
-    []
-  );
-  const [localTime, setLocalTime] = useState(formatLocalTime());
+  const [localTime, setLocalTime] = useState(() => timeFormatter.format(new Date()));
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    const tick = () => setLocalTime(formatLocalTime());
+    const tick = () => setLocalTime(timeFormatter.format(new Date()));
     const id = setInterval(tick, 30000);
     return () => clearInterval(id);
-  }, [formatLocalTime]);
+  }, []);
 
   useEffect(() => {
     document.documentElement.classList.toggle("light-mode", theme === "light");
@@ -66,6 +63,27 @@ export function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <header
@@ -146,7 +164,7 @@ export function Navbar() {
           className="md:hidden p-2 text-foreground hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
           aria-label="Toggle menu"
           aria-expanded={isMobileMenuOpen}
-          aria-controls={isMobileMenuOpen ? "mobile-menu" : undefined}
+          aria-controls="mobile-menu"
         >
           {isMobileMenuOpen ? (
             <X className="h-6 w-6" />
