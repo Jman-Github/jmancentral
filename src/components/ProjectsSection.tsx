@@ -2,20 +2,9 @@ import { Suspense } from "react";
 import { ProjectCard } from "@/components/ProjectCard";
 import { projects } from "@/config/siteData";
 import { useGitHubProjectStats } from "@/hooks/use-github-project-stats";
-import { cn } from "@/lib/utils";
 
 const activeProjects = projects.filter((p) => p.status === "active");
 const discontinuedProjects = projects.filter((p) => p.status === "discontinued");
-
-function getCenteredLastCardWrapperClass(index: number, total: number) {
-  const isLastOdd = total % 2 === 1 && index === total - 1;
-  return isLastOdd ? "md:col-span-2 md:flex md:justify-center" : undefined;
-}
-
-function getCenteredLastCardInnerClass(index: number, total: number) {
-  const isLastOdd = total % 2 === 1 && index === total - 1;
-  return isLastOdd ? "w-full md:w-[calc((100%-1.5rem)/2)]" : "w-full";
-}
 
 export function ProjectsSection() {
   const { data: githubStats = {} } = useGitHubProjectStats(activeProjects);
@@ -34,22 +23,17 @@ export function ProjectsSection() {
               <div className="w-3 h-3 rounded-full bg-green-500 animate-glow-pulse" />
               <h3 className="text-xl font-semibold text-foreground">Active Projects</h3>
             </div>
-            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none">
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:snap-none lg:grid-cols-3">
               {activeProjects.map((project, index) => (
                 <div
                   key={project.id}
-                  className={cn(
-                    "min-w-[280px] max-w-[340px] snap-center md:min-w-0 md:max-w-none",
-                    getCenteredLastCardWrapperClass(index, activeProjects.length)
-                  )}
+                  className="min-w-[280px] max-w-[340px] snap-center md:min-w-0 md:max-w-none"
                 >
-                  <div className={cn(getCenteredLastCardInnerClass(index, activeProjects.length))}>
-                    <ProjectCard
-                      project={project}
-                      index={index}
-                      stats={githubStats[project.id]}
-                    />
-                  </div>
+                  <ProjectCard
+                    project={project}
+                    index={index}
+                    stats={githubStats[project.id]}
+                  />
                 </div>
               ))}
             </div>
@@ -67,18 +51,9 @@ export function ProjectsSection() {
               {discontinuedProjects.map((project, index) => (
                 <div
                   key={project.id}
-                  className={cn(
-                    "min-w-[280px] max-w-[340px] snap-center md:min-w-0 md:max-w-none",
-                    getCenteredLastCardWrapperClass(index, discontinuedProjects.length)
-                  )}
+                  className="min-w-[280px] max-w-[340px] snap-center md:min-w-0 md:max-w-none"
                 >
-                  <div
-                    className={cn(
-                      getCenteredLastCardInnerClass(index, discontinuedProjects.length)
-                    )}
-                  >
-                    <ProjectCard project={project} index={index} />
-                  </div>
+                  <ProjectCard project={project} index={index} />
                 </div>
               ))}
             </div>

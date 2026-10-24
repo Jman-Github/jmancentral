@@ -28,7 +28,7 @@ export const projects: Project[] = [
     id: "patch-bundle-registry",
     name: "Patch Bundle Registry Repository",
     description: "A comprehensive database of ReVanced, Morphe, and Reseam patch bundles for easy use",
-    details: "This repository contains a comprehensive registry for ReVanced, Morphe, and Reseam patch bundles with searchable patches, app compatibility, historical releases, prereleases, and changelogs retrievable through a REST and GraphQL API plus a user friendly frontend.",
+    details: "A comprehensive registry for ReVanced, Morphe, and Reseam patch bundles with searchable patches, app compatibility, historical releases, prereleases, and changelogs retrievable through a REST and GraphQL API plus a user friendly frontend.",
     status: "active",
     url: "https://github.com/Jman-Github/Patch-Bundle-Registry",
     githubRepo: "Jman-Github/Patch-Bundle-Registry",

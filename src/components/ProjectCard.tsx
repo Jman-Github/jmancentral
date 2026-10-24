@@ -67,15 +67,15 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
   return (
     <article
       className={cn(
-        "group glass motion-surface rounded-xl overflow-hidden",
+        "group glass motion-surface flex h-full flex-col rounded-xl overflow-hidden",
         "hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5",
         "hover:-translate-y-1",
         "animate-slide-up"
       )}
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="p-6">
-        <div className="flex items-start gap-4">
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex flex-1 items-start gap-4">
           {/* Project Image */}
           {project.image && (
             <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-muted overflow-hidden">
@@ -94,7 +94,7 @@ export function ProjectCard({ project, index, stats }: ProjectCardProps) {
               <PopoverTrigger asChild>
                 <button
                   type="button"
-                  className="text-left w-full text-lg font-semibold text-foreground group-hover:text-primary transition-colors truncate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="text-left w-full text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   title={project.name}
                   aria-label={`Project name: ${project.name}`}
                 >
