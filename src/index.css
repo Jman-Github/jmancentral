@@ -1,249 +1,83 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* JMAN CENTRAL Design System - Aviation-inspired dark theme */
-
 @layer base {
+  /* Dark is the default; .light is set before first paint by the inline script in index.html. */
   :root {
-    /* Dark aviation theme - these are used in dark mode primarily */
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
-
-    /* Electric cyan accent - aviation instrument inspired */
-    --primary: 187 85% 53%;
-    --primary-foreground: 222 47% 6%;
-
-    --secondary: 222 30% 14%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 222 30% 18%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 187 85% 53%;
-    --accent-foreground: 222 47% 6%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 187 85% 53%;
-
-    --radius: 0.75rem;
-
-    /* Custom tokens */
-    --glow: 187 85% 53%;
-    --surface: 222 40% 12%;
-    --surface-hover: 222 35% 16%;
-    --motion-standard: cubic-bezier(0.22, 1, 0.36, 1);
-    --motion-swift: cubic-bezier(0.16, 1, 0.3, 1);
-    --motion-duration-fast: 180ms;
-    --motion-duration-base: 320ms;
-    --motion-duration-slow: 520ms;
-
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 187 85% 53%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 30% 14%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 187 85% 53%;
+    color-scheme: dark;
+    --bg: 14 14 13;
+    --surface: 24 24 22;
+    --fg: 236 235 230;
+    --muted: 160 159 151;
+    --subtle: 133 132 125;
+    --line: 40 40 37;
+    --line-strong: 64 64 59;
+    --accent: 255 107 53;
   }
 
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 187 85% 53%;
-    --primary-foreground: 222 47% 6%;
-    --secondary: 222 30% 14%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 222 30% 18%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 187 85% 53%;
-    --accent-foreground: 222 47% 6%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 187 85% 53%;
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 187 85% 53%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 30% 14%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 187 85% 53%;
-  }
-}
-
-.hero-grain {
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.04),
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px,
-      transparent 3px
-    ),
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03), transparent 25%),
-    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.02), transparent 20%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.015), transparent 35%);
-  mix-blend-mode: screen;
-  opacity: 0.28;
-  will-change: transform;
-  animation: grainShift 14s linear infinite;
-}
-
-@keyframes grainShift {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  20% {
-    transform: translate3d(-2px, -1px, 0);
-  }
-  40% {
-    transform: translate3d(2px, -2px, 0);
-  }
-  60% {
-    transform: translate3d(-1px, 2px, 0);
-  }
-  80% {
-    transform: translate3d(1px, 1px, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@layer base {
-  body {
-    overflow-x: hidden;
-  }
-}
-
-.light-mode {
-  --background: 0 0% 98%;
-  --foreground: 222 47% 8%;
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 8%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 8%;
-  --primary: 187 85% 45%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 220 14% 94%;
-  --secondary-foreground: 222 47% 8%;
-  --muted: 220 14% 92%;
-  --muted-foreground: 222 20% 35%;
-  --accent: 187 85% 45%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 62% 40%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 220 14% 90%;
-  --input: 220 14% 90%;
-  --ring: 187 85% 45%;
-  --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 222 47% 8%;
-  --sidebar-primary: 187 85% 45%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 14% 94%;
-  --sidebar-accent-foreground: 222 47% 8%;
-  --sidebar-border: 220 14% 90%;
-  --sidebar-ring: 187 85% 45%;
-}
-
-@layer base {
-  * {
-    @apply border-border;
+  :root.light {
+    color-scheme: light;
+    --bg: 247 246 242;
+    --surface: 238 237 231;
+    --fg: 20 20 19;
+    --muted: 87 86 81;
+    --subtle: 106 105 99;
+    --line: 224 223 216;
+    --line-strong: 200 199 191;
+    --accent: 194 65 12;
   }
 
   html {
-    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    @apply bg-bg font-sans text-fg antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent text-bg;
+  }
+
+  :focus-visible {
+    @apply rounded-sm outline outline-2 outline-offset-2 outline-accent;
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary to-cyan-300 bg-clip-text text-transparent;
+@layer components {
+  .link {
+    @apply underline decoration-line-strong decoration-1 underline-offset-4 transition-colors hover:decoration-accent;
   }
 
-  .glow {
-    box-shadow: 0 0 20px hsl(var(--glow) / 0.26), 0 0 40px hsl(var(--glow) / 0.1);
+  /* Grows a text link's hit area to ~40px tall for touch without changing layout. */
+  .tap-target {
+    padding-block: 0.625rem;
+    margin-block: -0.625rem;
   }
 
-  .glow-sm {
-    box-shadow: 0 0 12px hsl(var(--glow) / 0.18);
+  .icon-medal {
+    -webkit-mask: url("./assets/icons/medal.png") center / contain no-repeat;
+    mask: url("./assets/icons/medal.png") center / contain no-repeat;
+    /* Drawn with background-color, which forced-colors mode would repaint as Canvas and hide. */
+    forced-color-adjust: none;
   }
 
-  .glass {
-    @apply bg-card/80 backdrop-blur-md border border-border/50;
-  }
-
-  .surface {
-    @apply bg-surface border border-border;
-  }
-
-  .motion-surface {
-    transition-property: transform, box-shadow, border-color, background-color, opacity;
-    transition-duration: var(--motion-duration-base);
-    transition-timing-function: var(--motion-standard);
-  }
-
-  .motion-surface:is(:hover, :focus-within) {
-    will-change: transform;
-  }
-
-  .motion-interactive {
-    transition-property: transform, box-shadow, background-color, border-color, color, opacity;
-    transition-duration: var(--motion-duration-fast);
-    transition-timing-function: var(--motion-swift);
+  @media (forced-colors: active) {
+    /* Match the SVG icons, whose currentColor becomes the system text colour. Set `color`, not the
+       background: the bg-current utility (painted from currentColor) would override a background here. */
+    .icon-medal {
+      color: CanvasText;
+    }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .hero-grain {
-    animation: none;
-  }
-
-  .animate-fade-in,
-  .animate-slide-up,
-  .animate-float-gentle,
-  .animate-glow-pulse {
-    animation: none !important;
-    transform: none !important;
-  }
-
-  .animate-fade-in,
-  .animate-slide-up {
-    opacity: 1 !important;
-  }
-
-  .motion-surface,
-  .motion-interactive {
-    transition-duration: 0ms;
-    will-change: auto;
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
   }
 }

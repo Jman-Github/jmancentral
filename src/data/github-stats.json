@@ -1,0 +1,69 @@
+{
+  "username": "Jman-Github",
+  "profileUrl": "https://github.com/Jman-Github",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/128645077?v=4",
+  "publicRepos": 8,
+  "followers": 184,
+  "totalStars": 2590,
+  "totalForks": 109,
+  "totalPullRequests": 78,
+  "totalIssues": 49,
+  "joinedYear": 2023,
+  "topLanguages": [
+    "Kotlin",
+    "Python",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "repositories": {
+    "jman-github/awesome-android-patching": {
+      "fullName": "Jman-Github/Awesome-Android-Patching",
+      "url": "https://github.com/Jman-Github/Awesome-Android-Patching",
+      "stars": 379,
+      "forks": 8,
+      "pushedAt": "2026-11-25T17:00:39Z",
+      "latestRelease": null
+    },
+    "jman-github/jman-github": {
+      "fullName": "Jman-Github/Jman-Github",
+      "url": "https://github.com/Jman-Github/Jman-Github",
+      "stars": 1,
+      "forks": 0,
+      "pushedAt": "2026-10-29T23:20:38Z",
+      "latestRelease": null
+    },
+    "jman-github/jmancentral": {
+      "fullName": "Jman-Github/jmancentral",
+      "url": "https://github.com/Jman-Github/jmancentral",
+      "stars": 4,
+      "forks": 0,
+      "pushedAt": "2026-10-24T15:41:51Z",
+      "latestRelease": null
+    },
+    "jman-github/patch-bundle-registry": {
+      "fullName": "Jman-Github/Patch-Bundle-Registry",
+      "url": "https://github.com/Jman-Github/Patch-Bundle-Registry",
+      "stars": 740,
+      "forks": 48,
+      "pushedAt": "2026-11-25T17:39:32Z",
+      "latestRelease": null
+    },
+    "jman-github/universal-patch-manager": {
+      "fullName": "Jman-Github/Universal-Patch-Manager",
+      "url": "https://github.com/Jman-Github/Universal-Patch-Manager",
+      "stars": 1451,
+      "forks": 53,
+      "pushedAt": "2026-11-25T07:11:43Z",
+      "latestRelease": "v2.0.0"
+    },
+    "jman-github/universal-patch-manager-runtimes": {
+      "fullName": "Jman-Github/Universal-Patch-Manager-Runtimes",
+      "url": "https://github.com/Jman-Github/Universal-Patch-Manager-Runtimes",
+      "stars": 9,
+      "forks": 0,
+      "pushedAt": "2026-11-22T05:09:45Z",
+      "latestRelease": "morphe-v1.0.6"
+    }
+  },
+  "updatedAt": "2026-11-25T17:47:36.365Z"
+}

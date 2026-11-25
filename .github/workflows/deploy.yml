@@ -3,39 +3,67 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  # Rebuild every 6 hours so the GitHub stats baked into the site stay fresh.
   schedule:
     - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
+# One deployment at a time. Queued runs wait, but an in-progress deployment is never cancelled
+# (cancelling mid-deploy can leave Pages with a half-finished deployment).
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
+    # Runs queue rather than cancel (see concurrency), so cap each job well below the 6-hour default.
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
       - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
       - run: npm run build
         env:
+          # Scheduled runs fail instead of redeploying stale stats when the GitHub API is unavailable.
           GITHUB_STATS_STRICT: ${{ github.event_name == 'schedule' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      # No actions/configure-pages here: its outputs (base_path/base_url) aren't used, and its Pages API
+      # call needs `pages` permission this job doesn't have (the API returns 404 without it).
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
+
+  # Deploying from a separate job gives the artifact time to appear in the run's artifact list.
+  # In a single job, deploy-pages could query it milliseconds after upload and fail with
+  # 'No artifacts named "github-pages" were found'.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    # Two deploy-pages attempts (10-minute default timeout each) plus the 30-second pause.
+    timeout-minutes: 25
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment-retry.outputs.page_url }}
+    steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+      # deploy-pages looks up the artifact once with no retry. That lookup happens before a deployment
+      # is created, so retrying once after a pause is safe if the artifact list was briefly stale.
+      - if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+      - id: deployment-retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v5

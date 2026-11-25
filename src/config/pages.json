@@ -1,0 +1,16 @@
+{
+  "home": {
+    "path": "/",
+    "title": "Jman Central · Developer profile and projects",
+    "description": "Jman's developer profile: Universal Patch Manager, Patch Bundle Registry, and other open-source tools for patching Android apps with ReVanced, Morphe, and Reseam."
+  },
+  "social": {
+    "path": "/social/",
+    "title": "Social links · Jman Central",
+    "description": "Find Jman around the internet: GitHub, YouTube, Discord, X, Reddit, and more."
+  },
+  "notFound": {
+    "title": "Page not found · Jman Central",
+    "description": "The requested page could not be found."
+  }
+}

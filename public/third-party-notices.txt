@@ -1,0 +1,18 @@
+Third-party notices for jmancentral.com
+=======================================
+
+Xbox icon
+  Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
+  License: CC BY 4.0 (https://fontawesome.com/license/free)
+  Copyright 2024 Fonticons, Inc.
+
+Other platform icons
+  Simple Icons - https://simpleicons.org
+  License: CC0 1.0 Universal
+
+Typefaces: IBM Plex Sans and IBM Plex Mono
+  Copyright 2017 IBM Corp., with Reserved Font Name "Plex"
+  License: SIL Open Font License 1.1 (https://openfontlicense.org)
+  Packaged by Fontsource - https://fontsource.org
+
+Brand names and logos belong to their respective owners.
